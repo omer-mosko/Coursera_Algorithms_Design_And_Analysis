@@ -21,7 +21,7 @@ def ParseGraph(filename):
   - edges = [(vertex_1, vertex_2), ...]
   """
     edges = []
-    for l in open('scc.txt'):
+    for l in open(filename):
         fields = [int(f) for f in l.split()]
         edges.append(tuple(fields))
 
@@ -93,7 +93,7 @@ def DFS(edges, start, reversed=False):
             sys.stderr.write('Finished %s\n' % current)
 
 
-forward_adjacency, reverse_adjacency, edges = ParseGraph("algo4SCC.txt")
+forward_adjacency, reverse_adjacency, edges = ParseGraph("scc.txt")
 
 sys.stderr.write('Graph parsed\n')
 
@@ -103,8 +103,8 @@ DFSLoop(edges, labeling, True)
 
 sys.stderr.write('Reverse DFSLoop done\n')
 
-inverse_finishing = dict((v, k) for k, v in finishing.iteritems())
-finish_labeling = [inverse_finishing[i] for i in xrange(num_nodes, 0, -1)]
+inverse_finishing = dict((v, k) for k, v in finishing.items())
+finish_labeling = [inverse_finishing[i] for i in range(num_nodes, 0, -1)]
 
 ResetState()
 DFSLoop(edges, finish_labeling)
@@ -118,6 +118,11 @@ for i in leader:
     else:
         sccs[leader[i]].append(i)
 
+op = {}
 for i in sccs:
-    print
-    '%s\t%s' % (i, len(sccs[i]))
+    op[i] = len(sccs[i])
+
+op = sorted(op.values(), reverse=True)
+
+for i in range(5):
+    print(op[i])
