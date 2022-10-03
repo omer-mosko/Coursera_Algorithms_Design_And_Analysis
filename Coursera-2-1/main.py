@@ -93,7 +93,7 @@ def DFS(edges, start, reversed=False):
             sys.stderr.write('Finished %s\n' % current)
 
 
-forward_adjacency, reverse_adjacency, edges = ParseGraph("scc.txt")
+forward_adjacency, reverse_adjacency, edges = ParseGraph("test1.txt")
 
 sys.stderr.write('Graph parsed\n')
 
